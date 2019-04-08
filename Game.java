@@ -1,4 +1,5 @@
-public class Player {
-	int tries = 0;
-	public void move() {}
+public class Game {
+	public static void main(String[] args) {
+		// Good stuff here
+	}
 }
