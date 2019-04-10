@@ -1,14 +1,18 @@
 Player Class (Akash):
-	- Create all variables according to pygame
-	- Create stubs for methods
+	- Create all variables according to game
+	- Make move, fail, constrain?, displayTries (should this be in GameManagement?)
 		(according to document)
+		- Constrain will check for intersection with any platforms, for standing on them
 	
-Obstacle class (Arjun):
+GameObject class (Arjun):
+	- Import Rectangle class (java.awt.Rectangle)
+		https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html#intersects-java.awt.Rectangle-
 	- Create constructor:
-		Obstacle(int x, int y, int w, int h) 
-			(basically a box-collider)
-	- Make collider (obstacle_name.collide(Player arg) {})
+		Obstacle(int x, int y, int w, int h) extends Rectangle
+			(doesn't need a box-collider method anymore, Rectangle and intersect is imported)
+	- Make display method (inherited by all GameObjects (not Player, whose will be in move))
 	
-Game Operation Class (Both):
-	- Make pause functions and restart level stubs 
+GameManagement Class (Both):
+	- Make pause and restart level stubs 
 		(according to document)
+	- Make restartLevel, addObstacle, etc.
