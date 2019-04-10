@@ -1,0 +1,14 @@
+Player Class (Akash):
+	- Create all variables according to pygame
+	- Create stubs for methods
+		(according to document)
+	
+Obstacle class (Arjun):
+	- Create constructor:
+		Obstacle(int x, int y, int w, int h) 
+			(basically a box-collider)
+	- Make collider (obstacle_name.collide(Player arg) {})
+	
+Game Operation Class (Both):
+	- Make pause functions and restart level stubs 
+		(according to document)
