@@ -2,8 +2,8 @@ Player Class (Akash):
 	- Create all variables according to game
 	- Make move, fail, constrain?, displayTries (should this be in GameManagement?)
 		(according to document)
-		- Constrain will check for intersection with any platforms, for standing on them
-	
+		- Constrain will check for intersection with any platforms, for standing on /crashing into them
+
 GameObject class (Arjun):
 	- Import Rectangle class (java.awt.Rectangle)
 		https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html#intersects-java.awt.Rectangle-
@@ -11,8 +11,8 @@ GameObject class (Arjun):
 		Obstacle(int x, int y, int w, int h) extends Rectangle
 			(doesn't need a box-collider method anymore, Rectangle and intersect is imported)
 	- Make display method (inherited by all GameObjects (not Player, whose will be in move))
-	
+
 GameManagement Class (Both):
-	- Make pause and restart level stubs 
+	- Make pause and restart level stubs
 		(according to document)
 	- Make restartLevel, addObstacle, etc.
