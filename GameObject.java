@@ -1,8 +1,9 @@
 import java.awt.Rectangle;
 
 public class GameObject extends Rectangle {
-
-	public GameObject(double x, double y, double w, double h) { super(x, y, w, h); }
+	public GameObject(double x, double y, double w, double h) {
+		super(x, y, w, h);
+	}
 }
 
 // EXAMPLE CODE FOR INTERSECTION:
