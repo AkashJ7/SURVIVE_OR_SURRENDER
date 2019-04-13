@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.awt.*;
+import javax.swing.*;
 
 public class GameManagement {
-	String scene = "HOME";
-	int numObstacles = 1;
+
+	static int numObstacles = 1;
 	ArrayList<GameObject> obstacles = new ArrayList<GameObject>(); // creates list with all obstacles
 	ArrayList<GameObject> currentObstacles = new ArrayList<GameObject>(); // creates list for current obstacles
 
@@ -13,7 +15,7 @@ public class GameManagement {
 	}
 
 	public void addObstacle() {
-		currentObstacles = obstacles.copyOfRange(0, currentObstacles.size() + 1);
+		currentObstacles = obstacles.subList(0, currentObstacles.size() + 1);
 		// check for whether higher interval marking is exclusive or inclusive
 	}
 }

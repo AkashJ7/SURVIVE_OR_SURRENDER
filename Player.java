@@ -1,9 +1,10 @@
+import java.awt.*; // Image, event.KeyEvent
+
 public class Player extends GameObject {
-	int tries = 0;
-	boolean alive = true;
 
 	public Player() {
-		// Initialize this. variables
+		this.tries = 0;
+		this.alive = true;
 	}
 
 	public void move() {
@@ -20,7 +21,7 @@ public class Player extends GameObject {
 
 	public boolean checkForFailure(ArrayList<GameObject> list) {
 		for(danger : list) {
-			if danger.intersects(this) // find how to refer to self inside parentheses
+			if danger.intersects(this) { this.alive = false; }
 		}
 	}
 }
