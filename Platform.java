@@ -1,7 +1,7 @@
 public class Platform extends GameObject {
 
-	public Platform(double x, double y, double w, double h, String type) {
-		super(x, y, w, h);
+	public Platform(double x, double y, double l, String type) {
+		super(x, y, l);
 		this.type = type; // HORIZONTAL OR VERTICAL (WALL)
 	}
 }
