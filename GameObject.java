@@ -1,18 +1,14 @@
-import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
-public class GameObject extends Rectangle {
+public class GameObject extends Rectangle2D.Double {
+
+	double x, y, w, h;
+
 	public GameObject(double x, double y, double w, double h) {
 		super(x, y, w, h);
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
 	}
 }
-
-// EXAMPLE CODE FOR INTERSECTION:
-/*
-public class Test {
-   public static void main(String[] args) {
-      Rectangle a = new Rectangle(2, 4, 3, 5);
-      Rectangle b = new Rectangle(3, 4, 3, 5);
-      System.out.println(a.intersects(b));
-   }
-}
-*/
