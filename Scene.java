@@ -2,37 +2,54 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Scene {
+public class Scene extends JPanel {
 
 	static String scene = "HOME";
 	static final int DISPLAY_WIDTH = 800;
 	static final int DISPLAY_HEIGHT = 600;
 
-	public static void updateScene(JFrame frame) {
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
 		if (scene == "HOME") {
+			setBackground(Color.BLACK);
+			g.setColor(Color.BLUE);
+			g.setFont(new Font("Sans Serif", Font.BOLD, 36));
+			g.drawString("HOME", 100, 100);
+
 			JButton start = new JButton("START");
+			start.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			start.setFocusPainted(false);
+			start.setBounds(DISPLAY_WIDTH/2 - 100, 500, 200, 50);
 			start.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					removeAll();
 					scene = "NEXT";
 				}
 			});
-			start.setFont(new Font ("Sans Serif", Font.PLAIN, 20));
-			start.setBounds(DISPLAY_WIDTH/2 - 50, 450, 100, 40);
-			frame.add(start);
+			add(start);
 		}
 		else if (scene == "NEXT") {
-			JButton cone = new JButton("CONTINUE");
-			cone.setFocusPainted(false);
-			cone.setFont(new Font("Sans Serif", Font.BOLD, 20));
-			cone.setBounds(DISPLAY_WIDTH/2 - 75, 350, 150, 40);
-			//JLabel text = new JLabel("NEXT", SwingConstants.LEFT);
-			//text.setFont(new Font("Sans Serif", Font.PLAIN, 20));
-			frame.add(cone);
+			setBackground(Color.BLUE.darker());
+			g.setColor(Color.GREEN);
+			g.setFont(new Font("Sans Serif", Font.PLAIN, 48));
+			g.drawString("NEXT", 200, 200);
+			JButton back = new JButton("BACK");
+			back.setFont(new Font("Sans Serif", Font.PLAIN, 20));
+			back.setFocusPainted(false);
+			back.setBounds(DISPLAY_WIDTH/2 - 75, 400, 150, 50);
+			back.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					removeAll();
+					scene = "HOME";
+				}
+			});
+			add(back);
 		}
+
+		repaint();
 	}
 }
-
 
 /* FUNCTIONING COLLIDING CODE
 	ArrayList<GameObject> obstacles = new ArrayList<GameObject>(0);
