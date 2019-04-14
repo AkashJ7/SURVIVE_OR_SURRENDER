@@ -15,12 +15,12 @@ public class Scene extends JPanel {
 			setBackground(Color.BLACK);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Sans Serif", Font.BOLD, 36));
-			g.drawString("HOME", 100, 100);
+			g.drawString("HOME", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("HOME")/2, 100);
 
 			JButton start = new JButton("START");
 			start.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			start.setFocusPainted(false);
-			start.setBounds(DISPLAY_WIDTH/2 - 100, 500, 200, 50);
+			start.setBounds(DISPLAY_WIDTH/2 - 100, 450, 200, 50);
 			start.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					removeAll();
@@ -33,7 +33,7 @@ public class Scene extends JPanel {
 			setBackground(Color.BLUE.darker());
 			g.setColor(Color.GREEN);
 			g.setFont(new Font("Sans Serif", Font.PLAIN, 48));
-			g.drawString("NEXT", 200, 200);
+			g.drawString("NEXT", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("NEXT")/2, 200);
 			JButton back = new JButton("BACK");
 			back.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			back.setFocusPainted(false);
