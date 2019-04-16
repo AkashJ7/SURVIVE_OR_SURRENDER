@@ -19,7 +19,7 @@ public class Crusher implements ActionListener {//extends GameObject {
 		//moveHeight = 600-(yy + 10);
 
 		private class Listener implements ActionListener {
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)
 				while (yy > 600) {
 						speed = -0.1;
 				}
