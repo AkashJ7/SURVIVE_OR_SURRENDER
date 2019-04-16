@@ -8,17 +8,19 @@ public class Scene extends JPanel {
 	static final int DISPLAY_WIDTH = 800;
 	static final int DISPLAY_HEIGHT = 600;
 
+	Player player = new Player();
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+
+		setFocusable(true);
+		requestFocusInWindow();
 
 		if (scene == "HOME") {
 			setBackground(Color.BLACK);
 			g.setColor(Color.BLUE);
 			g.setFont(new Font("Sans Serif", Font.BOLD, 36));
 			g.drawString("HOME", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("HOME")/2, 100);
-
-			Player player = new Player();
-			System.out.println(player.x);
 
 			JButton start = new JButton("START");
 			start.setFont(new Font("Sans Serif", Font.PLAIN, 20));
@@ -31,6 +33,11 @@ public class Scene extends JPanel {
 				}
 			});
 			add(start);
+			addKeyListener(new Player.KeyInput());
+
+			player.move();
+			g.setColor(Color.RED);
+			g.drawRect((int) player.x, (int) player.y, (int) player.w, (int) player.h);
 		}
 		else if (scene == "NEXT") {
 			setBackground(Color.BLUE.darker());
