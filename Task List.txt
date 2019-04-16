@@ -1,8 +1,9 @@
 Player Class (Akash):
-	- Create all variables according to game
 	- Make move, fail, constrain?, displayTries (should this be in GameManagement?)
 		(according to document)
-		- Constrain will check for intersection with any platforms, for standing on /crashing into them
+		- Constrain will check for intersection with any platforms, for standing on/crashing into them
+	- Convert to Graphics 2D
+	- Look into BufferedImage (or frameRate setter) to reduce lag
 
 GameObject class (Arjun):
 	- Import Rectangle class (java.awt.Rectangle)
