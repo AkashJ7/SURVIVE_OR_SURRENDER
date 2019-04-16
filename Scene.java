@@ -17,6 +17,9 @@ public class Scene extends JPanel {
 			g.setFont(new Font("Sans Serif", Font.BOLD, 36));
 			g.drawString("HOME", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("HOME")/2, 100);
 
+			Player player = new Player();
+			System.out.println(player.x);
+
 			JButton start = new JButton("START");
 			start.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			start.setFocusPainted(false);
@@ -46,7 +49,6 @@ public class Scene extends JPanel {
 			});
 			add(back);
 		}
-
 		repaint();
 	}
 }
