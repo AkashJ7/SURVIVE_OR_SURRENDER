@@ -1,12 +1,12 @@
 import java.awt.*; // Image
 import java.awt.event.*; // event.KeyAdapter
-import java.util.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Player extends GameObject {
 
 	int tries = 0;
-	boolean alive = false;
+	boolean alive;
 	double speed = 3;
 	boolean jump = false;
 	double jumping_time = 0;
@@ -20,7 +20,7 @@ public class Player extends GameObject {
 		// Draw sprite 15 left and 5 up of rect
 	}
 
-	public void move () {
+	public void move (Graphics g) {
 		if (jump_height > 0) { // If touched ground again
 			jump = false; // Not jumping anymore
 			jumping_time = 0; // Reset parabola
@@ -42,6 +42,9 @@ public class Player extends GameObject {
 			this.x -= speed;
 			// Moving left, with opposite sprite animation
 		}
+
+		g.setColor(Color.RED);
+		g.drawRect((int) this.x, (int) (this.y + jump_height), (int) this.w, (int) this.h);
 	}
 
 	public void constrain() {
@@ -54,7 +57,7 @@ public class Player extends GameObject {
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
 		for(GameObject danger : obstacles) {
-			if (danger.intersects(this)) { alive = false; }
+			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) { alive = false; }
 		}
 	}
 

@@ -4,18 +4,23 @@ import javax.swing.*;
 
 public class GameManagement {
 
-	static int numObstacles = 1;
-	ArrayList<GameObject> obstacles = new ArrayList<GameObject>(); // creates list with all obstacles
-	ArrayList<GameObject> currentObstacles = new ArrayList<GameObject>(); // creates list for current obstacles
+	static ArrayList<GameObject> obstacles = new ArrayList<GameObject>() {{
+		add(new Crusher(310, 500));
+	}}; // list with all obstacles
+	static ArrayList<GameObject> currentObstacles = new ArrayList<GameObject>();
+	// creates list for current obstacles
 
-	public void pause() { scene = "PAUSE"; }
-
-	public void restartLevel() {
+	public static void restartLevel() {
 		// Player.failed = false; etc.
 	}
 
-	public void addObstacle() {
-		currentObstacles = obstacles.subList(0, currentObstacles.size() + 1);
-		// check for whether higher interval marking is exclusive or inclusive
+	public static void addObstacle() {
+		currentObstacles.add(obstacles.get(currentObstacles.size()));
+	}
+
+	public static void displayObstacles() {
+		for(GameObject i : currentObstacles) {
+			i.animate();
+		}
 	}
 }
