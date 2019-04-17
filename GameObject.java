@@ -1,5 +1,7 @@
 import java.awt.geom.Rectangle2D;
 
+@SuppressWarnings("serial")
+
 public class GameObject extends Rectangle2D.Double {
 
 	double x, y, w, h;
