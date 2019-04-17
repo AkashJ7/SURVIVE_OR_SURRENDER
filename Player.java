@@ -3,6 +3,8 @@ import java.awt.event.*; // event.KeyAdapter
 import java.util.ArrayList;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
+
 public class Player extends GameObject {
 
 	int tries = 0;

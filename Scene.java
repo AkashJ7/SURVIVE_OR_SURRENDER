@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
+
 public class Scene extends JPanel {
 
 	static String scene = "HOME";
@@ -11,7 +13,7 @@ public class Scene extends JPanel {
 	Player player = new Player();
 	JButton start = new JButton("START");
 	JButton back = new JButton("BACK");
-	Jbutton pause = new JButton("||"); // genius setText
+	JButton pause = new JButton("||"); // genius setText
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
