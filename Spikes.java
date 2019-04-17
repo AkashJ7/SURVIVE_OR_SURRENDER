@@ -7,15 +7,15 @@ import javax.swing.*;
 
 public class Spikes extends GameObject {
 
-	public Spikes(int x, int y, int w) {
-		super(x, y, w);
-		Imageicon spike = new ImageIcon("Sprites/Ground Spikes.jpg");
+	public Spikes(double x, double y, double w) {
+		super(x, y, w*10.0, 10.0/*DO CONSTRUCTOR*/);
+		Imageicon spike = new ImageIcon("Sprites/Ground Spikes.png");
 	}
 
 
 	public void animate(Graphics g) {
 		for (int i = 0; i < this.w; i++) {
-			g.drawImage(spike.getImage(), this.x+i*this.w, this.y, null);
+			g.drawImage(spike.getImage(), this.x+i*10.0, this.y, null);
 		}
 	}
 

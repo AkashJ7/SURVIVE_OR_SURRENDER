@@ -1,13 +1,27 @@
 public class Platform extends GameObject {
 
 	public Platform(double x, double y, double l, String type) {
-		super(x, y);
-		this.length = l;
-		this.type = type; // HORIZONTAL OR VERTICAL (WALL)
+	 	// HORIZONTAL OR VERTICAL (WALL)
+		if (type == "wall") {
+			super(x, y, 5.0, 5.0*l);
+		} else if (type == "platform") {
+			super(x, y, 5.0*l, 5.0);
+		}
+
+		ImageIcon block = new ImageIcon("Sprites/block.png")
 	}
-	if (type == "wall") {
-		//code to make the length grow sideways
-	} else if (type == "platform") {
-		//code to make the length show down-up
+
+	public void animate(Graphics g) {
+		if (this.type = "wall") {
+			for (int i = 0; i < this.l, i++) {
+				g.drawImage(block.getImage(), this.x, this.y+i*5.0);
+			}
+		}
+		else if (this.type = "wall") {
+			for (int i = 0; i < this.l, i++) {
+				g.drawImage(block.getImage(), this.x+i*5.0, this.y);
+			}
+		}
 	}
+
 }
