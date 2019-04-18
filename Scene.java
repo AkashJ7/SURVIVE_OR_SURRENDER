@@ -13,7 +13,7 @@ public class Scene extends JPanel {
 	Player player = new Player();
 	JButton start = new JButton("START");
 	JButton back = new JButton("BACK");
-	JButton pause = new JButton("||"); // genius setText
+	JButton pause = new JButton("| |"); // genius setText
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -37,17 +37,13 @@ public class Scene extends JPanel {
 				}
 			});
 			add(start);
-			addKeyListener(new Player.KeyInput());
-
-			player.move(g);
-			GameManagement.displayObstacles(g);
-			player.checkForFailure(GameManagement.currentObstacles);
 		}
 		else if (scene == "NEXT") {
 			setBackground(Color.BLUE.darker());
 			g.setColor(Color.GREEN);
 			g.setFont(new Font("Sans Serif", Font.PLAIN, 48));
 			g.drawString("NEXT", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("NEXT")/2, 200);
+
 			back.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			back.setFocusPainted(false);
 			back.setBounds(DISPLAY_WIDTH/2 - 75, 400, 150, 50);
@@ -57,6 +53,30 @@ public class Scene extends JPanel {
 					scene = "HOME";
 				}
 			});
+
+			pause.setMargin(new Insets(0, 0, 4, 0));
+			pause.setBackground(Color.GRAY.darker());
+			pause.setForeground(Color.WHITE);
+			pause.setFont(new Font("Sans Serif", Font.BOLD, 20));
+			pause.setFocusPainted(false);
+			pause.setBounds(DISPLAY_WIDTH - 65, 10, 40, 40);
+			pause.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					removeAll();
+					scene = "PAUSED";
+				}
+			});
+
+			add(back);
+			add(pause);
+			addKeyListener(new Player.KeyInput());
+
+			player.move(g);
+			GameManagement.displayObstacles(g);
+			player.checkForFailure(GameManagement.currentObstacles);
+		}
+		else if (scene == "PAUSED") {
+			setBackground(Color.BLACK);
 			add(back);
 		}
 		repaint();

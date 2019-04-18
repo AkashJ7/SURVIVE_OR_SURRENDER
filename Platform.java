@@ -3,6 +3,8 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
+
 public class Platform extends GameObject {
 
 	public Platform(double x, double y, double l, String type) {

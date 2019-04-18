@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
+
 public class Crusher extends GameObject{
 	private double moveHeight;
 	private double speed = 5;
