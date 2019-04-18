@@ -13,4 +13,6 @@ public class GameObject extends Rectangle2D.Double {
 		this.w = w;
 		this.h = h;
 	}
+
+	public void animate(Graphics g) {};
 }

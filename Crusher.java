@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Crusher extends GameObject{
 	private double moveHeight;
-	private double speed = 50;
+	private double speed = 5;
 	private ImageIcon crusher;
 
 	public Crusher(double x, double y) {
@@ -18,10 +18,10 @@ public class Crusher extends GameObject{
 	@Override
 	public void animate(Graphics g) {
 		if (this.y+250 > 600) {
-				speed = -10;
+				speed = -1;
 		}
 		if (this.y+250 < 50) {
-			speed = 50;
+			speed = 5;
 		}
 		this.y += speed;
 		g.drawImage(crusher.getImage(), (int)this.x, (int)this.y, 100, 250, null);
