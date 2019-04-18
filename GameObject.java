@@ -15,5 +15,5 @@ public class GameObject extends Rectangle2D.Double {
 		this.h = h;
 	}
 
-	public void animate(Graphics g) {};
+	public void animate(boolean update, Graphics g) {};
 }

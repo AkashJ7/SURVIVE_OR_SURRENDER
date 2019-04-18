@@ -9,7 +9,7 @@ public class Game {
 		window.setLocation(1368/2 - Scene.DISPLAY_WIDTH/2, 768/2 - Scene.DISPLAY_HEIGHT/2);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setContentPane(new Scene());
+		window.setContentPane(new Scene(120));
 		window.setVisible(true);
 	}
 }

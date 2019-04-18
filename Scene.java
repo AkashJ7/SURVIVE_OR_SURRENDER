@@ -4,16 +4,26 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 
-public class Scene extends JPanel {
+public class Scene extends JPanel implements ActionListener {
 
 	static String scene = "HOME";
 	static final int DISPLAY_WIDTH = 800;
 	static final int DISPLAY_HEIGHT = 600;
+	static boolean update = false;
 
 	Player player = new Player();
 	JButton start = new JButton("START");
 	JButton back = new JButton("BACK");
 	JButton pause = new JButton("| |"); // genius setText
+	JButton resume = new JButton("RESUME");
+	GameObject crusher = new Crusher(10, 500);
+
+	public Scene(int fps) {
+		Timer gameTimer = new Timer(1000/fps, this);
+		gameTimer.start();
+	}
+
+	public void actionPerformed(ActionEvent e) { update = true; }
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -71,14 +81,26 @@ public class Scene extends JPanel {
 			add(pause);
 			addKeyListener(new Player.KeyInput());
 
-			player.move(g);
-			GameManagement.displayObstacles(g);
+			player.move(update, g);
+			GameManagement.displayObstacles(update, g);
 			player.checkForFailure(GameManagement.currentObstacles);
 		}
 		else if (scene == "PAUSED") {
 			setBackground(Color.BLACK);
-			add(back);
+
+			resume.setFont(new Font("Sans Serif", Font.PLAIN, 20));
+			resume.setFocusPainted(false);
+			resume.setBounds(DISPLAY_WIDTH/2 - 75, 400, 150, 50);
+			resume.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					removeAll();
+					scene = "NEXT";
+				}
+			});
+
+			add(resume);
 		}
 		repaint();
+		update = false;
 	}
 }

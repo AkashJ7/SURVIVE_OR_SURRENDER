@@ -22,27 +22,29 @@ public class Player extends GameObject {
 		// Draw sprite 15 left and 5 up of rect
 	}
 
-	public void move (Graphics g) {
-		if (jump_height > 0) { // If touched ground again
-			jump = false; // Not jumping anymore
-			jumping_time = 0; // Reset parabola
-		}
-		if (UP && falling == false) {
-			jump = true;
-		}
-		if (jump) {
-			jumping_time += 2;
-			jump_height = -(-0.03*jumping_time*jumping_time + 3.5*jumping_time);
-			// jump math prob needs tweaking based on our sizes/game
-		}
-		if (RIGHT) {
-			this.x += speed;
-			//g.draw(this);
-			//System.out.println(this.x);
-			// Sprite animation
-		} else if (LEFT) {
-			this.x -= speed;
-			// Moving left, with opposite sprite animation
+	public void move (boolean update, Graphics g) {
+		if (update) {
+			if (jump_height > 0) { // If touched ground again
+				jump = false; // Not jumping anymore
+				jumping_time = 0; // Reset parabola
+			}
+			if (UP && falling == false) {
+				jump = true;
+			}
+			if (jump) {
+				jumping_time += 2;
+				jump_height = -(-0.03*jumping_time*jumping_time + 3.5*jumping_time);
+				// jump math prob needs tweaking based on our sizes/game
+			}
+			if (RIGHT) {
+				this.x += speed;
+				//g.draw(this);
+				//System.out.println(this.x);
+				// Sprite animation
+			} else if (LEFT) {
+				this.x -= speed;
+				// Moving left, with opposite sprite animation
+			}
 		}
 
 		g.setColor(Color.RED);
@@ -59,7 +61,9 @@ public class Player extends GameObject {
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
 		for(GameObject danger : obstacles) {
-			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) { alive = false; }
+			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) {
+				alive = false;
+			}
 		}
 	}
 
