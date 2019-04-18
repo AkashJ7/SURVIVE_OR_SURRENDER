@@ -1,4 +1,5 @@
 import java.awt.geom.Rectangle2D;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 
@@ -13,4 +14,6 @@ public class GameObject extends Rectangle2D.Double {
 		this.w = w;
 		this.h = h;
 	}
+
+	public void animate(Graphics g) {};
 }
