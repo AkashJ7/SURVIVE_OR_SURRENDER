@@ -24,8 +24,8 @@ public class Scene extends JPanel {
 		if (scene == "HOME") {
 			setBackground(Color.BLACK);
 			g.setColor(Color.BLUE);
-			g.setFont(new Font("Sans Serif", Font.BOLD, 36));
-			g.drawString("HOME", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("HOME")/2, 100);
+			g.setFont(new Font("Sans Serif", Font.ITALIC, 36));
+			g.drawString("SURVIVE OR SURRENDER", DISPLAY_WIDTH/2 - g.getFontMetrics().stringWidth("SURVIVE OR SURRENDER")/2, 100);
 
 			start.setFont(new Font("Sans Serif", Font.PLAIN, 20));
 			start.setFocusPainted(false);
@@ -40,6 +40,7 @@ public class Scene extends JPanel {
 			addKeyListener(new Player.KeyInput());
 
 			player.move(g);
+			GameManagement.displayObstacles(g);
 			player.checkForFailure(GameManagement.currentObstacles);
 		}
 		else if (scene == "NEXT") {
