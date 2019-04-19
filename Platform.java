@@ -12,22 +12,22 @@ public class Platform extends GameObject {
 	public Platform(double x, double y, double l, String type) {
 	 	// HORIZONTAL OR VERTICAL (WALL)
 		if (type == "wall") {
-			super(x, y, 5.0, 5.0*l);
+			super(x, y, 5.0, 5.0 * l);
 		} else if (type == "platform") {
-			super(x, y, 5.0*l, 5.0);
+			super(x, y, 5.0 * l, 5.0);
 		}
 
-		block = new ImageIcon("Sprites/block.png")
+		block = new ImageIcon("Sprites/block.png");
 	}
 	@Override
 	public void animate(boolean update, Graphics g) {
 		if (this.type = "wall") {
-			for (int i = 0; i < this.l / 5.0, i++) {
+			for (int i = 0; i < this.l / 5.0; i++) {
 				g.drawImage(block.getImage(), (int) this.x, (int) this.y + i * 5);
 			}
 		}
 		else if (this.type = "platform") {
-			for (int i = 0; i < this.l / 5.0, i++) {
+			for (int i = 0; i < this.l / 5.0; i++) {
 				g.drawImage(block.getImage(), (int) this.x + i * 5, (int) this.y);
 			}
 		}

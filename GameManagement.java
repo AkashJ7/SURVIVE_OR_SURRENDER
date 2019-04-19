@@ -20,9 +20,9 @@ public class GameManagement {
 	public static void addObstacle() {
 		currentObstacles.add(obstacles.get(currentObstacles.size()));
 	}
-	public static void displayObstacles(Graphics g) {
+	public static void displayObstacles(boolean update, Graphics g) {
 		for(GameObject i : currentObstacles) {
-			i.animate(g);
+			i.animate(update, g);
 		}
 	}
 }
