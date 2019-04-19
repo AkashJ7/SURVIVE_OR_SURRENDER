@@ -17,13 +17,12 @@ public class Crusher extends GameObject{
 	}
 
 	@Override
-	public void animate(boolean update, Graphics g) {
-		if (update) {
-			if (this.y+250 > 600) speed = -1;
-			if (this.y+250 < 50) speed = 5;
-			this.y += speed;
-		}
-		g.drawImage(crusher.getImage(), (int) this.x, (int) this.y, (int) this.w, (int) this.h, null);
-		g.drawRect((int) this.x, (int) this.y, (int) this.w, (int) this.h);
+	public void animate(Graphics screen) {
+		if (this.y + 250 > 600) speed = -1;
+		if (this.y + 250 < 50) speed = 5;
+		this.y += speed;
+
+		screen.drawImage(crusher.getImage(), (int) this.x, (int) this.y, (int) this.w, (int) this.h, null);
+		screen.drawRect((int) this.x, (int) this.y, (int) this.w, (int) this.h);
 	}
 }
