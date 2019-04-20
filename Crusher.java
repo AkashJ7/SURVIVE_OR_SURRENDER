@@ -1,30 +1,27 @@
-import java.awt.Rectangle;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
+
 public class Crusher extends GameObject{
 	private double moveHeight;
-	private double speed = 50;
+	private double speed = 5;
 	private ImageIcon crusher;
 
 	public Crusher(double x, double y) {
-		super(x, y, 100.0, 500.0); // w/h have to be decided on based off sprite
+		super(x, y, 20 * 5, 49 * 5); // w/h have to be decided on based off sprite
 		// We can use my sprite from my game for this (resized)
 
-		crusher = new ImageIcon("Sprites/Metal Crusher.png");
+		crusher = new ImageIcon("Sprites/output-onlinepngtools.png");
 	}
 
 	@Override
-	public void animate(Graphics g) {
-		if (this.y+250 > 600) {
-				speed = -10;
-		}
-		if (this.y+250 < 50) {
-			speed = 50;
-		}
+	public void animate(Graphics screen) {
+		if (this.y + 250 > 600) speed = -1;
+		if (this.y + 250 < 50) speed = 5;
 		this.y += speed;
-		g.drawImage(crusher.getImage(), (int)this.x, (int)this.y, 100, 250, null);
-		g.drawRect((int)this.x, (int)this.y, 100, 250);
+		screen.drawImage(crusher.getImage(), (int) this.x, (int) this.y, (int) this.w, (int) this.h, null);
+		screen.drawRect((int) this.x, (int) this.y, (int) this.w, (int) this.h);
 	}
 }

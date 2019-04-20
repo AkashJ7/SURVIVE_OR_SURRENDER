@@ -3,28 +3,37 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
+
 public class Platform extends GameObject {
+
+	private ImageIcon block;
+	private double length;
+	private String type1;
 
 	public Platform(double x, double y, double l, String type) {
 	 	// HORIZONTAL OR VERTICAL (WALL)
-		if (type == "wall") {
-			super(x, y, 5.0, 5.0*l);
-		} else if (type == "platform") {
-			super(x, y, 5.0*l, 5.0);
-		}
-
-		ImageIcon block = new ImageIcon("Sprites/block.png")
+		//if (type == "wall") {
+			super(x, y, 10, 10 * l);
+		//} else if (type == "platform") {
+		//	super(x, y, 5.0 * l, 5.0);
+		//}
+		length = l;
+		type1 = type;
+		block = new ImageIcon("Sprites/Block.JPG");
 	}
 	@Override
 	public void animate(Graphics g) {
-		if (this.type = "wall") {
-			for (int i = 0; i < this.l, i++) {
-				g.drawImage(block.getImage(), this.x, this.y+i*5.0);
+		if (type1.equals("wall")) {
+			for (int i = 0; i < length / 5.0; i++) {
+				g.drawImage(block.getImage(), (int) this.x, (int) this.y + i * 5, 20, 20, null);
+				g.drawRect((int) this.x, (int) this.y + i * 5, 20, 20);
 			}
 		}
-		else if (this.type = "wall") {
-			for (int i = 0; i < this.l, i++) {
-				g.drawImage(block.getImage(), this.x+i*5.0, this.y);
+		else if (type1.equals("platform")) {
+			for (int i = 0; i < length; i++) {
+				g.drawImage(block.getImage(), (int) this.x + i * 20, (int) this.y, 20, 20, null);
+				g.drawRect((int) this.x + i * 20, (int) this.y, 20, 20);
 			}
 		}
 	}

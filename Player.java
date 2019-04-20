@@ -1,12 +1,14 @@
 import java.awt.*; // Image
 import java.awt.event.*; // event.KeyAdapter
-import java.util.*;
+import java.util.ArrayList;
 import javax.swing.*;
+
+@SuppressWarnings("serial")
 
 public class Player extends GameObject {
 
 	int tries = 0;
-	boolean alive = false;
+	boolean alive;
 	double speed = 3;
 	boolean jump = false;
 	double jumping_time = 0;
@@ -20,7 +22,7 @@ public class Player extends GameObject {
 		// Draw sprite 15 left and 5 up of rect
 	}
 
-	public void move () {
+	public void move (Graphics screen) {
 		if (jump_height > 0) { // If touched ground again
 			jump = false; // Not jumping anymore
 			jumping_time = 0; // Reset parabola
@@ -35,26 +37,38 @@ public class Player extends GameObject {
 		}
 		if (RIGHT) {
 			this.x += speed;
-			//g.draw(this);
-			//System.out.println(this.x);
 			// Sprite animation
 		} else if (LEFT) {
 			this.x -= speed;
 			// Moving left, with opposite sprite animation
 		}
+
+		screen.setColor(Color.RED);
+		screen.drawRect((int) this.x, (int) (this.y + jump_height), (int) this.w, (int) this.h);
 	}
 
 	public void constrain() {
-		//
+		if (this.x > 760) {
+			this.x = 760;
+		} else if (this.x < 5) {
+			this.x = 5;
+		}
 	}
 
-	public void displayTries(Graphics g) {
-		//
+	public void displayTries(Graphics screen) {
+		screen.setColor(Color.BLUE);
+		screen.setFont(new Font("Sans Serif", Font.ITALIC, 36));
+		screen.drawString("Tries: "+tries, 80, 50);
+
 	}
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
 		for(GameObject danger : obstacles) {
-			if (danger.intersects(this)) { alive = false; }
+			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) {
+				alive = false;
+				tries++;
+				System.out.println("dead");
+			}
 		}
 	}
 
