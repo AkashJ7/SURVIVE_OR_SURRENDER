@@ -63,7 +63,7 @@ public class Player extends GameObject {
 		}
 	}
 
-	static class KeyInput extends KeyAdapter {
+	class KeyInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) RIGHT = true;
 			else if (e.getKeyCode() == KeyEvent.VK_LEFT) LEFT = true;

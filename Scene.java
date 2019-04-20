@@ -19,10 +19,12 @@ public class Scene extends JPanel {
 	JButton resume = new JButton("RESUME");
 	BufferedImage buffer = new BufferedImage(DISPLAY_WIDTH, DISPLAY_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	Graphics screen = buffer.getGraphics();
+	Player.KeyInput playerControl = player.new KeyInput();
 
 	public Scene(int fps) {
 		Timer gameTimer = new Timer(1000/fps, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removeAll();
 				updateScene();
 				repaint();
 			}
@@ -45,7 +47,7 @@ public class Scene extends JPanel {
 			screen.setFont(new Font("Sans Serif", Font.PLAIN, 48));
 			screen.drawString("NEXT", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("NEXT")/2, 200);
 
-			addKeyListener(new Player.KeyInput());	
+			addKeyListener(playerControl);
 
 			player.move(screen);
 			GameManagement.displayObstacles(screen);
@@ -71,7 +73,6 @@ public class Scene extends JPanel {
 			start.setBounds(DISPLAY_WIDTH/2 - 100, 450, 200, 50);
 			start.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					removeAll();
 					scene = "NEXT";
 				}
 			});
@@ -83,7 +84,6 @@ public class Scene extends JPanel {
 			back.setBounds(DISPLAY_WIDTH/2 - 75, 400, 150, 50);
 			back.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					removeAll();
 					scene = "HOME";
 				}
 			});
@@ -96,7 +96,6 @@ public class Scene extends JPanel {
 			pause.setBounds(DISPLAY_WIDTH - 65, 10, 40, 40);
 			pause.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					removeAll();
 					scene = "PAUSED";
 				}
 			});
@@ -110,7 +109,6 @@ public class Scene extends JPanel {
 			resume.setBounds(DISPLAY_WIDTH/2 - 75, 400, 150, 50);
 			resume.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					removeAll();
 					scene = "NEXT";
 				}
 			});
