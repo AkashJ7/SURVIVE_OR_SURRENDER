@@ -22,7 +22,7 @@ public class Player extends GameObject {
 		// Draw sprite 15 left and 5 up of rect
 	}
 
-	public void move (Graphics g) {
+	public void move (Graphics screen) {
 		if (jump_height > 0) { // If touched ground again
 			jump = false; // Not jumping anymore
 			jumping_time = 0; // Reset parabola
@@ -36,34 +36,34 @@ public class Player extends GameObject {
 			// jump math prob needs tweaking based on our sizes/game
 		}
 		if (RIGHT) {
-			this.x += speed;
-			//g.draw(this);
-			//System.out.println(this.x);
+			this.box.x += speed;
 			// Sprite animation
 		} else if (LEFT) {
-			this.x -= speed;
+			this.box.x -= speed;
 			// Moving left, with opposite sprite animation
 		}
 
-		g.setColor(Color.RED);
-		g.drawRect((int) this.x, (int) (this.y + jump_height), (int) this.w, (int) this.h);
+		screen.setColor(Color.RED);
+		screen.drawRect((int) this.box.x, (int) (this.box.y + jump_height), (int) this.box.width, (int) this.box.height);
 	}
 
 	public void constrain() {
 		//
 	}
 
-	public void displayTries(Graphics g) {
+	public void displayTries(Graphics screen) {
 		//
 	}
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
 		for(GameObject danger : obstacles) {
-			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) { alive = false; }
+			if (danger.box.intersects(this.box.x, this.box.y + jump_height, this.box.width, this.box.height)) {
+				alive = false;
+			}
 		}
 	}
 
-	static class KeyInput extends KeyAdapter {
+	class KeyInput extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) RIGHT = true;
 			else if (e.getKeyCode() == KeyEvent.VK_LEFT) LEFT = true;

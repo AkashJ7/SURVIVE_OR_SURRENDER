@@ -1,19 +1,10 @@
 Player Class (Akash):
-	- Make move, fail, constrain?, displayTries (should this be in GameManagement?)
+	- Make constrain?, displayTries (should this be in GameManagement?)
 		(according to document)
 		- Constrain will check for intersection with any platforms, for standing on/crashing into them
-	- Convert to Graphics 2D
-	- Look into BufferedImage (or frameRate setter) to reduce lag
-
-GameObject class (Arjun):
-	- Import Rectangle class (java.awt.Rectangle)
-		https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html#intersects-java.awt.Rectangle-
-	- Create constructor:
-		Obstacle(int x, int y, int w, int h) extends Rectangle
-			(doesn't need a box-collider method anymore, Rectangle and intersect is imported)
-	- Make display method (inherited by all GameObjects (not Player, whose will be in move))
+	- Convert KeyListener system to KeyBinding system
 
 GameManagement Class (Both):
-	- Make pause and restart level stubs
+	- Make restart level stubs
 		(according to document)
-	- Make restartLevel, addObstacle, etc.
+	- Make restartLevel
