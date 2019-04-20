@@ -23,14 +23,13 @@ public class Platform extends GameObject {
 	public void animate(boolean update, Graphics g) {
 		if (this.type = "wall") {
 			for (int i = 0; i < this.l / 5.0; i++) {
-				g.drawImage(block.getImage(), (int) this.x, (int) this.y + i * 5);
+				g.drawImage(block.getImage(), (int) this.box.x, (int) this.box.y + i * 5);
 			}
 		}
 		else if (this.type = "platform") {
 			for (int i = 0; i < this.l / 5.0; i++) {
-				g.drawImage(block.getImage(), (int) this.x + i * 5, (int) this.y);
+				g.drawImage(block.getImage(), (int) this.box.x + i * 5, (int) this.box.y);
 			}
 		}
 	}
-
 }

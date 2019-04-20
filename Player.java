@@ -36,15 +36,15 @@ public class Player extends GameObject {
 			// jump math prob needs tweaking based on our sizes/game
 		}
 		if (RIGHT) {
-			this.x += speed;
+			this.box.x += speed;
 			// Sprite animation
 		} else if (LEFT) {
-			this.x -= speed;
+			this.box.x -= speed;
 			// Moving left, with opposite sprite animation
 		}
 
 		screen.setColor(Color.RED);
-		screen.drawRect((int) this.x, (int) (this.y + jump_height), (int) this.w, (int) this.h);
+		screen.drawRect((int) this.box.x, (int) (this.box.y + jump_height), (int) this.box.width, (int) this.box.height);
 	}
 
 	public void constrain() {
@@ -57,7 +57,7 @@ public class Player extends GameObject {
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
 		for(GameObject danger : obstacles) {
-			if (danger.intersects(this.x, this.y + jump_height, this.w, this.h)) {
+			if (danger.box.intersects(this.box.x, this.box.y + jump_height, this.box.width, this.box.height)) {
 				alive = false;
 			}
 		}

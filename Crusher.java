@@ -18,11 +18,11 @@ public class Crusher extends GameObject{
 
 	@Override
 	public void animate(Graphics screen) {
-		if (this.y + 250 > 600) speed = -1;
-		if (this.y + 250 < 50) speed = 5;
-		this.y += speed;
+		if (this.box.y + 250 > 600) speed = -1;
+		if (this.box.y + 250 < 50) speed = 5;
+		this.box.y += speed;
 
-		screen.drawImage(crusher.getImage(), (int) this.x, (int) this.y, (int) this.w, (int) this.h, null);
-		screen.drawRect((int) this.x, (int) this.y, (int) this.w, (int) this.h);
+		screen.drawImage(crusher.getImage(), (int) this.box.x, (int) this.box.y, (int) this.box.width, (int) this.box.height, null);
+		screen.drawRect((int) this.box.x, (int) this.box.y, (int) this.box.width, (int) this.box.height);
 	}
 }

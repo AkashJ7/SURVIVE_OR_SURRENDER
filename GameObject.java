@@ -3,16 +3,12 @@ import java.awt.*;
 
 @SuppressWarnings("serial")
 
-public class GameObject extends Rectangle2D.Double {
+public class GameObject {
 
-	double x, y, w, h;
+	Rectangle2D.Double box;
 
 	public GameObject(double x, double y, double w, double h) {
-		super(x, y, w, h);
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		this.box = new Rectangle2D.Double(x, y, w, h);
 	}
 
 	public void animate(Graphics screen) {};
