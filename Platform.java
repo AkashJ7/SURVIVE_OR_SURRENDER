@@ -14,7 +14,7 @@ public class Platform extends GameObject {
 	public Platform(double x, double y, double l, String type) {
 	 	// HORIZONTAL OR VERTICAL (WALL)
 		//if (type == "wall") {
-			super(x, y, 10, 10 * l);
+			super(x, y, 20*l, 20);
 		//} else if (type == "platform") {
 		//	super(x, y, 5.0 * l, 5.0);
 		//}
@@ -27,7 +27,7 @@ public class Platform extends GameObject {
 		if (type1.equals("wall")) {
 			for (int i = 0; i < length / 5.0; i++) {
 				g.drawImage(block.getImage(), (int) this.x, (int) this.y + i * 5, 20, 20, null);
-				g.drawRect((int) this.x, (int) this.y + i * 5, 20, 20);
+				g.drawRect((int) this.x, (int) this.y + i * 20, 20, 20);
 			}
 		}
 		else if (type1.equals("platform")) {

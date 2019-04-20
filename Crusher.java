@@ -13,7 +13,7 @@ public class Crusher extends GameObject{
 		super(x, y, 20 * 5, 49 * 5); // w/h have to be decided on based off sprite
 		// We can use my sprite from my game for this (resized)
 
-		crusher = new ImageIcon("Sprites/output-onlinepngtools.png");
+		crusher = new ImageIcon("Sprites/CRUSHER.png");
 	}
 
 	@Override

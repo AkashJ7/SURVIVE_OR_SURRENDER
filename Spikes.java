@@ -10,7 +10,7 @@ public class Spikes extends GameObject {
 
 	public Spikes(double x, double y, double w) {
 		super(x, y, w * 27.0, 30.0);
-		spike = new ImageIcon("Sprites/Ground Spikes.png");
+		spike = new ImageIcon("Sprites/SPIKE.png");
 	}
 
 	@Override
