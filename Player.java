@@ -1,5 +1,4 @@
 import java.awt.*; // Image
-import java.awt.event.*; // event.KeyAdapter
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -7,18 +6,18 @@ import javax.swing.*;
 
 public class Player extends GameObject {
 
-	int tries = 0;
-	boolean alive;
+	int attempts = 0;
+	boolean alive = true;
+	boolean succeeded = false;
 	double speed = 3;
 	boolean jump = false;
 	double jumping_time = 0;
 	double jump_height;
 	boolean falling = false;
-	static boolean RIGHT, LEFT, UP;
+	boolean RIGHT, LEFT, UP;
 
 	public Player() {
 		super(100, 500, 20, 50);
-		alive = true;
 		// Draw sprite 15 left and 5 up of rect
 	}
 
@@ -63,17 +62,9 @@ public class Player extends GameObject {
 		}
 	}
 
-	class KeyInput extends KeyAdapter {
-		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT) RIGHT = true;
-			else if (e.getKeyCode() == KeyEvent.VK_LEFT) LEFT = true;
-			if (e.getKeyCode() == KeyEvent.VK_UP) UP = true;
-		}
-
-		public void keyReleased(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT) RIGHT = false;
-			else if (e.getKeyCode() == KeyEvent.VK_LEFT) LEFT = false;
-			if (e.getKeyCode() == KeyEvent.VK_UP) UP = false;
+	public void checkForSuccess(GameObject door) {
+		if(door.box.intersects(this.box.x, this.box.y + jump_height, this.box.width, this.box.height)) {
+			succeeded = true;
 		}
 	}
 }
