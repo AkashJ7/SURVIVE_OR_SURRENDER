@@ -17,13 +17,13 @@ public class Scene extends JPanel {
 	static boolean ranIntro_PAUSED = false;
 
 	Player player = new Player();
+	GameObject door = new GameObject(720, 500, 50, 80);
 	JButton start = new JButton("START");
 	JButton back = new JButton("BACK");
 	JButton pause = new JButton("| |"); // genius setText
 	JButton resume = new JButton("RESUME");
 	BufferedImage buffer = new BufferedImage(DISPLAY_WIDTH, DISPLAY_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	Graphics screen = buffer.getGraphics();
-	Player.KeyInput playerControl = player.new KeyInput();
 
 	Font sans36i = new Font("Sans Serif", Font.ITALIC, 36);
 	Font sans48 = new Font("Sans Serif", Font.PLAIN, 48);
@@ -31,6 +31,14 @@ public class Scene extends JPanel {
 	Font sans20b = new Font("Sans Serif", Font.BOLD, 20);
 
 	public Scene(int fps) {
+		GameManagement.addKeyBinding(this, KeyEvent.VK_UP, "JUMP", (e) -> { player.UP = true; }, false);
+		GameManagement.addKeyBinding(this, KeyEvent.VK_RIGHT, "RIGHT", (e) -> { player.RIGHT = true; }, false);
+		GameManagement.addKeyBinding(this, KeyEvent.VK_LEFT, "LEFT", (e) -> { player.LEFT = true; }, false);
+
+		GameManagement.addKeyBinding(this, KeyEvent.VK_UP, "!JUMP", (e) -> { player.UP = false; }, true);
+		GameManagement.addKeyBinding(this, KeyEvent.VK_RIGHT, "!RIGHT", (e) -> { player.RIGHT = false; }, true);
+		GameManagement.addKeyBinding(this, KeyEvent.VK_LEFT, "!LEFT", (e) -> { player.LEFT = false; }, true);
+
 		Timer gameTimer = new Timer(1000/fps, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				removeAll();
@@ -57,9 +65,20 @@ public class Scene extends JPanel {
 			screen.setFont(sans48);
 			screen.drawString("NEXT", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("NEXT")/2, 200);
 
+			screen.fillRect((int) door.box.x, (int) door.box.y, (int) door.box.width, (int) door.box.height);
+
 			player.move(screen);
 			GameManagement.displayObstacles(screen);
 			player.checkForFailure(GameManagement.currentObstacles);
+			player.checkForSuccess(door);
+			if (!player.alive || player.succeeded) {
+				if (GameManagement.currentObstacles.size() != GameManagement.obstacles.size()) {
+					GameManagement.restartLevel(player);
+				}
+				else if (player.succeeded) {
+					scene =  "COMPLETED";
+				}
+			}
 		}
 		else if (scene == "PAUSED") {
 			screen.setColor(Color.BLACK);
@@ -113,8 +132,6 @@ public class Scene extends JPanel {
 						scene = "PAUSED";
 					}
 				});
-
-				addKeyListener(playerControl);
 
 				ranIntro_NEXT = true;
 			}
