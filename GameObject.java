@@ -1,17 +1,15 @@
 import java.awt.geom.Rectangle2D;
 import java.awt.*;
 
-public class GameObject extends Rectangle2D.Double {
+@SuppressWarnings("serial")
 
-	double x, y, w, h;
+public class GameObject {
+
+	Rectangle2D.Double box;
 
 	public GameObject(double x, double y, double w, double h) {
-		super(x, y, w, h);
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		this.box = new Rectangle2D.Double(x, y, w, h);
 	}
 
-	public void animate(Graphics g) {};
+	public void animate(Graphics screen) {};
 }

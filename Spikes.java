@@ -1,4 +1,3 @@
-import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -14,10 +13,9 @@ public class Spikes extends GameObject {
 	}
 
 	@Override
-	public void animate(Graphics g) {
-		for (int i = 0; i < this.w / 27; i++) {
-			g.drawImage(spike.getImage(), (int) (this.x + i * 27), (int) this.y, null);
-			g.drawRect((int)(this.x + i * 27.0), (int)this.y, 27, 30);
+	public void animate(Graphics screen) {
+		for (int i = 0; i < this.box.width / 27; i++) {
+			screen.drawImage(spike.getImage(), (int) (this.box.x + i * 27), (int) this.box.y, null);
 		}
 	}
 }

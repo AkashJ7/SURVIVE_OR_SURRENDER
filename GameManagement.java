@@ -6,18 +6,32 @@ import javax.swing.*;
 
 public class GameManagement {
 	static ArrayList<GameObject> obstacles = new ArrayList<GameObject>() {{
-		add(new Spikes(170.0, 525.0, 2.0));
-		add(new Platform(400.0, 480.0, 10.0, "platform"));
-		add(new Spikes(340.0, 525, 10.0));
-		add(new Crusher(410.0, 50.0));
-		add(new Crusher(150.0, 50.0));
+
 	}}; // list with all obstacles
 	static ArrayList<GameObject> currentObstacles = new ArrayList<GameObject>() {{
-		add(new Spikes(170.0, 525.0, 2.0));
-		add(new Platform(400.0, 480.0, 10.0, "platform"));
-		add(new Spikes(340.0, 525, 10.0));
-		add(new Crusher(410.0, 50.0));
-		add(new Crusher(50.0, 50.0));
+		add(new Spikes(330.0, 510.0, 2.0));   //2
+		add(new Spikes(460.0, 510.0, 6.0));  //3
+		add(new Crusher(480.0, 50.0));    //4
+		add(new Crusher(100.0, 50.0));
+	}};
+
+	static ArrayList<GameObject> wallPlatform = new ArrayList<GameObject>() {{
+
+		//add(new Wall(400.0, 80.0, 20.0));
+	}};
+
+	static ArrayList<GameObject> currentWallPlatform = new ArrayList<GameObject>() {{
+		add(new Wall(0.0, 0.0, 27.0));
+		add(new Wall(765.0, 0.0, 27.0));
+		add(new Platform(0.0, 540.0, 40.0));
+
+		add(new Platform(480.0, 460.0, 10.0));  //3
+		add(new Platform(20.0, 460.0, 14.0));   //5
+		add(new Platform(240.0, 380.0, 12.0));   //5
+		add(new Wall(480.0, 380.0, 4.0));       //5
+		add(new Wall(580.0, 200.0, 10.0));     //7
+		add(new Wall(240.0, 340.0, 2.0));      //8
+		add(new Platform(20.0, 400.0, 4.0));
 	}};
 	// creates list for current obstacles
 
@@ -30,8 +44,10 @@ public class GameManagement {
 	}
 	public static void displayObstacles(Graphics screen) {
 		for(GameObject i : currentObstacles) {
-			screen.setColor(Color.RED);
 			i.animate(screen);
+		}
+		for(GameObject a : currentWallPlatform) {
+			a.animate(screen);
 		}
 	}
 }
