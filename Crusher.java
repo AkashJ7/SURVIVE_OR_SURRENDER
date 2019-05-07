@@ -1,28 +1,27 @@
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
 
 public class Crusher extends GameObject{
-	private double moveHeight;
-	private double speed = 5;
-	private ImageIcon crusher;
+	double moveHeight;
+	double speed = 20;
+	ImageIcon crusher;
 
 	public Crusher(double x, double y) {
-		super(x, y, 20 * 5, 49 * 5); // w/h have to be decided on based off sprite
+		super(x, y, 20 * 5, 50); // w/h have to be decided on based off sprite
 		// We can use my sprite from my game for this (resized)
 
-		crusher = new ImageIcon("Sprites/Metal Crusher.png");
+		crusher = new ImageIcon("Sprites/CRUSHER.png");
 	}
 
 	@Override
 	public void animate(Graphics screen) {
-		if (this.box.y + 250 > 600) speed = -1;
-		if (this.box.y + 250 < 50) speed = 5;
+		if (this.box.y > 420) speed = -5;
+		if (this.box.y + 250 < 50) speed = 20;
 		this.box.y += speed;
 
-		screen.drawImage(crusher.getImage(), (int) this.box.x, (int) this.box.y, (int) this.box.width, (int) this.box.height, null);
+		screen.drawImage(crusher.getImage(), (int) this.box.x, (int) this.box.y, (int) this.box.width, (int) this.box.height * 5, null);
 		screen.drawRect((int) this.box.x, (int) this.box.y, (int) this.box.width, (int) this.box.height);
 	}
 }

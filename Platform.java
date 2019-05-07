@@ -1,5 +1,3 @@
-import java.awt.Rectangle;
-import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -7,29 +5,20 @@ import javax.swing.*;
 
 public class Platform extends GameObject {
 
-	private ImageIcon block;
+	ImageIcon block;
+	double length;
 
-	public Platform(double x, double y, double l, String type) {
-	 	// HORIZONTAL OR VERTICAL (WALL)
-		if (type == "wall") {
-			super(x, y, 5.0, 5.0 * l);
-		} else if (type == "platform") {
-			super(x, y, 5.0 * l, 5.0);
-		}
-
-		block = new ImageIcon("Sprites/block.png");
+	public Platform(double x, double y, double l) {
+		super(x, y, 20 * l, 20);
+		length = l;
+		block = new ImageIcon("Sprites/Block.jpg");
 	}
+
 	@Override
-	public void animate(boolean update, Graphics g) {
-		if (this.type = "wall") {
-			for (int i = 0; i < this.l / 5.0; i++) {
-				g.drawImage(block.getImage(), (int) this.box.x, (int) this.box.y + i * 5);
-			}
+	public void animate(Graphics screen) {
+		for (int i = 0; i < length; i++) {
+			screen.drawImage(block.getImage(), (int) this.box.x + i * 20, (int) this.box.y, 20, 20, null);
 		}
-		else if (this.type = "platform") {
-			for (int i = 0; i < this.l / 5.0; i++) {
-				g.drawImage(block.getImage(), (int) this.box.x + i * 5, (int) this.box.y);
-			}
-		}
+		screen.drawRect((int) this.box.x, (int) this.box.y, (int) (20*length), 20);
 	}
 }

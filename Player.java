@@ -47,7 +47,38 @@ public class Player extends GameObject {
 	}
 
 	public void constrain() {
-		//
+		if (this.box.x > 760) this.box.x = 760;
+		else if (this.box.x < 5) this.box.x = 5;
+
+		for(GameObject i : GameManagement.currentWallPlatform) {
+			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x+i.box.width)
+					&& (this.box.y+jump_height <= i.box.y+i.box.height && this.box.y+jump_height >= i.box.y)
+					&& jumping_time < 60) {
+			  jumping_time += 2*(Math.abs(59-jumping_time));  //under platform
+			}
+
+			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x)
+					&& (this.box.y+jump_height < i.box.y+i.box.height+5 && this.box.y+this.box.height+jump_height > i.box.y+10))
+				this.box.x = i.box.x - this.box.width-1;   //left of platform
+
+
+			if ((this.box.x < i.box.x+i.box.width && this.box.x+this.box.width > i.box.x+i.box.width)
+					&& (this.box.y+jump_height < i.box.y+i.box.height-5 && this.box.y+this.box.height+jump_height > i.box.y+10))
+				this.box.x = i.box.x+i.box.width + 1;         //right of platform
+
+			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x+i.box.width) && (this.box.y+this.box.height+jump_height > i.box.y
+					&& this.box.y+this.box.height+jump_height < i.box.y+i.box.height)) {
+				this.box.y = i.box.y - this.box.height - 5;           //above platform
+			  jumping_time = 116;
+				//jump = false;
+
+			} else {
+				if ((this.box.x+this.box.width < i.box.x || this.box.x > i.box.x+i.box.width)
+						&& (jumping_time > 95 || jumping_time < 4))
+					this.box.y += 1.1;
+
+			}
+		}
 	}
 
 	public void displayTries(Graphics screen) {

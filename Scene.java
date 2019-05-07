@@ -34,9 +34,10 @@ public class Scene extends JPanel {
 	BufferedImage buffer = new BufferedImage(DISPLAY_WIDTH, DISPLAY_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	Graphics screen = buffer.getGraphics();
 
+	ImageIcon background = new ImageIcon("Sprites/Bricks.png");
 	ImageIcon logo = new ImageIcon("Sprites/Logo.png");
-	ImageIcon spikes_logo = new ImageIcon("Sprites/Ground Spikes.png");
-	//ImageIcon platform_logo = new ImageIcon("Sprites/[INSERT PATH_NAME].[INSERT EXTENSION]");
+	ImageIcon spikes_logo = new ImageIcon("Sprites/SPIKE.png");
+	ImageIcon platform_logo = new ImageIcon("Sprites/Block.jpg");
 	ImageIcon trophy = new ImageIcon("Sprites/Trophy.png");
 	//ImageIcon [INSERT NAME] = new ImageIcon("Sprites/[INSERT PATH_NAME].[INSERT EXTENSION]");
 
@@ -83,6 +84,8 @@ public class Scene extends JPanel {
 			screen.drawImage(logo.getImage(), DISPLAY_WIDTH/2 - logo.getIconWidth()/4, 135, logo.getIconWidth()/2, logo.getIconHeight()/2, null);
 			for (int i = 1; i <= 5; i++) {
 				screen.drawImage(spikes_logo.getImage(), DISPLAY_WIDTH/2 + 97 - 38 * i, 275, (int) (spikes_logo.getIconWidth() * 1.5), (int) (spikes_logo.getIconHeight() * 1.5), null);
+				screen.drawImage(platform_logo.getImage(), DISPLAY_WIDTH/2 + 107 - platform_logo.getIconWidth()/16 * i, 320, platform_logo.getIconWidth()/16, platform_logo.getIconHeight()/16, null);
+				if(i < 4) screen.drawImage(platform_logo.getImage(), DISPLAY_WIDTH/2 + 107 - platform_logo.getIconWidth()/16 * (i + 5), 320, platform_logo.getIconWidth()/16, platform_logo.getIconHeight()/16, null);
 			}
 		}
 		else if (scene == "CONTROLS") {
@@ -109,15 +112,13 @@ public class Scene extends JPanel {
 		}
 		else if (scene == "NEXT") {
 			screen.setColor(Color.BLUE.darker());
-			screen.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
-			screen.setColor(Color.GREEN);
-			screen.setFont(sans50bi);
-			screen.drawString("NEXT", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("NEXT")/2, 200);
+			screen.drawImage(background.getImage(), 0, 0, null);
 
 			screen.fillRect((int) door.box.x, (int) door.box.y, (int) door.box.width, (int) door.box.height);
 
+			player.constrain();
 			player.move(screen);
-			GameManagement.displayObstacles(screen);
+			GameManagement.displayGameObjects(screen);
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
