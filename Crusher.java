@@ -15,7 +15,6 @@ public class Crusher extends GameObject{
 		crusher = new ImageIcon("Sprites/CRUSHER.png");
 	}
 
-	@Override
 	public void animate(Graphics screen) {
 		if (this.box.y > 420) speed = -5;
 		if (this.box.y + 250 < 50) speed = 20;

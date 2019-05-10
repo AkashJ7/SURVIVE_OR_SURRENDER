@@ -14,7 +14,6 @@ public class Wall extends GameObject {
 		block = new ImageIcon("Sprites/Block.jpg");
 	}
 
-	@Override
 	public void animate(Graphics screen) {
 	    for (int i = 0; i < height; i++) {
 	    	screen.drawImage(block.getImage(), (int) this.box.x, (int) this.box.y + i * 20, 20, 20, null);

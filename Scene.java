@@ -39,7 +39,7 @@ public class Scene extends JPanel {
 	ImageIcon spikes_logo = new ImageIcon("Sprites/SPIKE.png");
 	ImageIcon platform_logo = new ImageIcon("Sprites/Block.jpg");
 	ImageIcon trophy = new ImageIcon("Sprites/Trophy.png");
-	//ImageIcon [INSERT NAME] = new ImageIcon("Sprites/[INSERT PATH_NAME].[INSERT EXTENSION]");
+	ImageIcon flag = new ImageIcon("Sprites/Surrender Flag.png");
 
 	Font sans20 = new Font("Sans Serif", Font.PLAIN, 20);
 	Font sans20b = new Font("Sans Serif", Font.BOLD, 20);
@@ -152,8 +152,9 @@ public class Scene extends JPanel {
 			screen.setColor(new Color(70, 15, 15));
 			screen.fillRect(0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT);
 			screen.setColor(Color.WHITE);
-			screen.setFont(sans50b);
-			screen.drawString("BUMMER!", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("BUMMER")/2, 100);
+			screen.setFont(sans50bi);
+			screen.drawString("YOU GAVE UP!", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("YOU GAVE UP!")/2, 100);
+			screen.drawImage(flag.getImage(), DISPLAY_WIDTH/2 - flag.getIconWidth()/8, 125, flag.getIconWidth()/4, flag.getIconHeight()/4, null);
 			screen.setFont(sans30);
 			screen.drawString("Determination is the key to success...", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Determination is the key to success...")/2, 375);
 			screen.drawString(String.valueOf(GameManagement.obstacles.size() - GameManagement.currentObstacles.size()) + " " + ((GameManagement.obstacles.size() - GameManagement.currentObstacles.size() == 1) ? "obstacle" : "obstacles") + " remained", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth(String.valueOf(GameManagement.obstacles.size() - GameManagement.currentObstacles.size()) + " " + ((GameManagement.obstacles.size() - GameManagement.currentObstacles.size() == 1) ? "obstacle" : "obstacles") + " remained")/2, 425);
