@@ -8,8 +8,8 @@ public class Crusher extends GameObject{
 	double speed = 20;
 	ImageIcon crusher;
 
-	public Crusher(double x, double y) {
-		super(x, y, 20 * 5, 50); // w/h have to be decided on based off sprite
+	public Crusher(double x, double y, int tag) {
+		super(x, y, 20 * 5, 50, tag); // w/h have to be decided on based off sprite
 		// We can use my sprite from my game for this (resized)
 
 		crusher = new ImageIcon("Sprites/CRUSHER.png");

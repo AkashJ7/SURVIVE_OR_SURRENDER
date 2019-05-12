@@ -7,8 +7,8 @@ public class Spikes extends GameObject {
 
 	ImageIcon spike;
 
-	public Spikes(double x, double y, double w) {
-		super(x, y, w * 27.0, 30.0);
+	public Spikes(double x, double y, double w, int tag) {
+		super(x, y, w * 27.0, 30.0, tag);
 		spike = new ImageIcon("Sprites/SPIKE.png");
 	}
 

@@ -21,7 +21,7 @@ public class Scene extends JPanel {
 	static boolean ranIntro_SURRENDERED = false;
 
 	Player player = new Player();
-	GameObject door = new GameObject(720, 500, 50, 80);
+	GameObject door = new GameObject(720, 500, 50, 80, 1);
 	JButton start = new JButton("START");
 	JButton returnHome = new JButton("RETURN TO MENU");
 	JButton pause = new JButton("| |");
@@ -65,10 +65,18 @@ public class Scene extends JPanel {
 
 		Timer gameTimer = new Timer(1000/fps, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				removeAll();
 				updateScene();
 				revalidate();
-				repaint();
+				if (scene == "NEXT") {
+					repaint((int) player.box.x - 2, (int) (player.box.y + player.jump_height - 10), (int) (player.box.width + 5), (int) (player.box.height + 22));
+					for (GameObject i : GameManagement.currentObstacles) {
+						repaint((int) i.box.x - 1, (int) i.box.y - 10, (int) i.box.width + 2, (int) i.box.height + 20);
+					}
+					for (GameObject i : GameManagement.currentWallPlatform) {
+						repaint((int) i.box.x - 1, (int) i.box.y - 1, (int) i.box.width + 2, (int) i.box.height + 2);
+					}
+				}
+				else { repaint(); }
 			}
 		});
 		gameTimer.start();
@@ -111,9 +119,9 @@ public class Scene extends JPanel {
 			screen.drawString("Akash Jagdeesh and Arjun Jagdeesh", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Akash Jagdeesh and Arjun Jagdeesh")/2, 400);
 		}
 		else if (scene == "NEXT") {
-			screen.setColor(Color.BLUE.darker());
 			screen.drawImage(background.getImage(), 0, 0, null);
 
+			screen.setColor(Color.BLUE.darker());
 			screen.fillRect((int) door.box.x, (int) door.box.y, (int) door.box.width, (int) door.box.height);
 
 			player.constrain();
@@ -122,11 +130,14 @@ public class Scene extends JPanel {
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
-				if (GameManagement.currentObstacles.size() != GameManagement.obstacles.size()) {
+				if ((GameManagement.currentObstacles.size() != GameManagement.obstacles.size()) ||
+					(GameManagement.currentWallPlatform.size() != GameManagement.wallPlatform.size())) {
 					GameManagement.restartLevel(player);
 				}
 				else if (player.succeeded) {
-					scene =  "COMPLETED";
+					removeAll();
+					ranIntro_COMPLETED = false;
+					scene = "COMPLETED";
 				}
 			}
 		}
@@ -146,7 +157,7 @@ public class Scene extends JPanel {
 			screen.drawImage(trophy.getImage(), DISPLAY_WIDTH/2 - trophy.getIconWidth()/40, 150, trophy.getIconWidth()/20, trophy.getIconHeight()/20, null);
 			screen.setFont(sans30);
 			screen.drawString("You beat the game in", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("You beat the game in")/2, 375);
-			screen.drawString(String.valueOf(player.attempts) + " attempts!", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth(String.valueOf(player.attempts) + " attempts!")/2, 425);
+			screen.drawString(String.valueOf(player.attempts) + " attempt" + ((player.attempts == 1) ? "!" : "s!"), DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth(String.valueOf(player.attempts) + " attempt" + ((player.attempts == 1) ? "!" : "s!"))/2, 425);
 		}
 		else if (scene == "SURRENDERED") {
 			screen.setColor(new Color(70, 15, 15));
@@ -176,6 +187,7 @@ public class Scene extends JPanel {
 				start.setBackground(Color.DARK_GRAY);
 				start.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_LEVEL = false;
 						scene = "NEXT";
 					}
@@ -189,6 +201,7 @@ public class Scene extends JPanel {
 				credits.setBackground(Color.DARK_GRAY);
 				credits.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_CREDITS = false;
 						scene = "CREDITS";
 					}
@@ -202,20 +215,22 @@ public class Scene extends JPanel {
 				controls.setBackground(Color.DARK_GRAY);
 				controls.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_CONTROLS = false;
 						scene = "CONTROLS";
 					}
 				});
 
 				ranIntro_HOME = true;
-			}
 
-			add(start);
-			add(credits);
-			add(controls);
+				add(start);
+				add(credits);
+				add(controls);
+			}
 		}
 		else if (scene == "NEXT") {
 			if (!ranIntro_LEVEL) {
+				repaint();
 				pause.setMargin(new Insets(0, 0, 4, 0));
 				pause.setBackground(Color.GRAY.darker());
 				pause.setForeground(Color.WHITE);
@@ -224,15 +239,16 @@ public class Scene extends JPanel {
 				pause.setBounds(DISPLAY_WIDTH - 65, 10, 40, 40);
 				pause.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_PAUSED = false;
 						scene = "PAUSED";
 					}
 				});
 
 				ranIntro_LEVEL = true;
-			}
 
-			add(pause);
+				add(pause);
+			}
 		}
 		else if (scene == "PAUSED") {
 			if (!ranIntro_PAUSED) {
@@ -244,6 +260,7 @@ public class Scene extends JPanel {
 				resume.setMargin(new Insets(0, 0, 0, 0));
 				resume.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_LEVEL = false;
 						scene = "NEXT";
 					}
@@ -259,7 +276,10 @@ public class Scene extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
 						player.attempts = 0;
+						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
+						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						removeAll();
 						ranIntro_LEVEL = false;
 						scene = "NEXT";
 					}
@@ -275,17 +295,21 @@ public class Scene extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
 						player.attempts = 0;
+						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
+						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						removeAll();
+						ranIntro_HOME = false;
 						scene = "HOME";
 					}
 				});
 
 				ranIntro_PAUSED = true;
-			}
 
-			add(resume);
-			add(restartGame);
-			add(returnHome);
+				add(resume);
+				add(restartGame);
+				add(returnHome);
+			}
 		}
 		else if (scene == "CONTROLS" || scene == "CREDITS") {
 			if (!ranIntro_CONTROLS || !ranIntro_CREDITS) {
@@ -297,6 +321,7 @@ public class Scene extends JPanel {
 				backToHome.setForeground(Color.WHITE);
 				backToHome.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						removeAll();
 						ranIntro_HOME = false;
 						scene = "HOME";
 					}
@@ -304,9 +329,9 @@ public class Scene extends JPanel {
 
 				ranIntro_CONTROLS = true;
 				ranIntro_CREDITS = true;
-			}
 
-			add(backToHome);
+				add(backToHome);
+			}
 		}
 		else if (scene == "COMPLETED" || scene == "SURRENDERED") {
 			if (!ranIntro_COMPLETED || !ranIntro_SURRENDERED) {
@@ -320,16 +345,20 @@ public class Scene extends JPanel {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
 						player.attempts = 0;
+						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
+						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						removeAll();
+						ranIntro_HOME = false;
 						scene = "HOME";
 					}
 				});
 
 				ranIntro_COMPLETED = true;
 				ranIntro_SURRENDERED = true;
-			}
 
-			add(returnHome);
+				add(returnHome);
+			}
 		}
 	}
 }

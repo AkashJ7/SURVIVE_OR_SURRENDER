@@ -17,7 +17,7 @@ public class Player extends GameObject {
 	boolean RIGHT, LEFT, UP;
 
 	public Player() {
-		super(100, 500, 20, 50);
+		super(100, 500, 20, 50, 1);
 		// Draw sprite 15 left and 5 up of rect
 	}
 
@@ -74,7 +74,7 @@ public class Player extends GameObject {
 
 			} else {
 				if ((this.box.x+this.box.width < i.box.x || this.box.x > i.box.x+i.box.width)
-						&& (jumping_time > 95 || jumping_time < 4))
+						&& (jump_height > -1))
 					this.box.y += 1.1;
 
 			}
