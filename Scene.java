@@ -21,7 +21,7 @@ public class Scene extends JPanel {
 	static boolean ranIntro_SURRENDERED = false;
 
 	Player player = new Player();
-	GameObject door = new GameObject(720, 500, 50, 80, 1);
+	GameObject door = new GameObject(700, 480, 50, 80, 1);
 	JButton start = new JButton("START");
 	JButton returnHome = new JButton("RETURN TO MENU");
 	JButton pause = new JButton("| |");
@@ -130,8 +130,8 @@ public class Scene extends JPanel {
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
-				if ((GameManagement.currentObstacles.size() != GameManagement.obstacles.size()) ||
-					(GameManagement.currentWallPlatform.size() != GameManagement.wallPlatform.size())) {
+				if ((GameManagement.currentObstacles.size() < GameManagement.obstacles.size()) ||
+					(GameManagement.currentWallPlatform.size() < GameManagement.wallPlatform.size())) {
 					GameManagement.restartLevel(player);
 				}
 				else if (player.succeeded) {

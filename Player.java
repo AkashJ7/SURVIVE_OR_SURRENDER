@@ -15,10 +15,19 @@ public class Player extends GameObject {
 	double jump_height;
 	boolean falling = false;
 	boolean RIGHT, LEFT, UP;
+	double sprite_counter = 0;
+	boolean going_right = true;
+	ArrayList<ImageIcon> runningRight = new ArrayList<ImageIcon>() {{
+		for(int i = 0; i < 20; i++)
+			add(new ImageIcon("Sprites/Running - Right/" + String.valueOf(i) + ".png"));
+	}};
+	ArrayList<ImageIcon> runningLeft = new ArrayList<ImageIcon>() {{
+		for(int i = 0; i < 20; i++)
+			add(new ImageIcon("Sprites/Running - Left/" + String.valueOf(i) + ".png"));
+	}};
 
 	public Player() {
 		super(100, 500, 20, 50, 1);
-		// Draw sprite 15 left and 5 up of rect
 	}
 
 	public void move (Graphics screen) {
@@ -32,14 +41,29 @@ public class Player extends GameObject {
 		if (jump) {
 			jumping_time += 2;
 			jump_height = -(-0.03*jumping_time*jumping_time + 3.5*jumping_time);
-			// jump math prob needs tweaking based on our sizes/game
+			if (going_right) screen.drawImage(runningRight.get((int) (jumping_time / 20) + 14).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+			else screen.drawImage(runningLeft.get((int) (jumping_time / 20) + 14).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
 		}
 		if (RIGHT) {
 			this.box.x += speed;
-			// Sprite animation
+			going_right = true;
+			if (!jump) {
+				screen.drawImage(runningRight.get((int) sprite_counter % runningRight.size()).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+				sprite_counter += 0.5;
+			}
 		} else if (LEFT) {
+			going_right = false;
 			this.box.x -= speed;
-			// Moving left, with opposite sprite animation
+			if (!jump) {
+				screen.drawImage(runningLeft.get((int) sprite_counter % runningRight.size()).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+				sprite_counter += 0.5;
+			}
+		} else {
+			sprite_counter = 0;
+			if (!jump) {
+				if (going_right) screen.drawImage(runningRight.get(12).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+				else screen.drawImage(runningLeft.get(12).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+			}
 		}
 
 		screen.setColor(Color.RED);
@@ -54,13 +78,12 @@ public class Player extends GameObject {
 			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x+i.box.width)
 					&& (this.box.y+jump_height <= i.box.y+i.box.height && this.box.y+jump_height >= i.box.y)
 					&& jumping_time < 60) {
-			  jumping_time += 2*(Math.abs(59-jumping_time));  //under platform
+				jumping_time += 2*(Math.abs(59-jumping_time));  //under platform
 			}
 
 			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x)
 					&& (this.box.y+jump_height < i.box.y+i.box.height+5 && this.box.y+this.box.height+jump_height > i.box.y+10))
 				this.box.x = i.box.x - this.box.width-1;   //left of platform
-
 
 			if ((this.box.x < i.box.x+i.box.width && this.box.x+this.box.width > i.box.x+i.box.width)
 					&& (this.box.y+jump_height < i.box.y+i.box.height-5 && this.box.y+this.box.height+jump_height > i.box.y+10))
@@ -69,14 +92,11 @@ public class Player extends GameObject {
 			if ((this.box.x+this.box.width > i.box.x && this.box.x < i.box.x+i.box.width) && (this.box.y+this.box.height+jump_height > i.box.y
 					&& this.box.y+this.box.height+jump_height < i.box.y+i.box.height)) {
 				this.box.y = i.box.y - this.box.height - 5;           //above platform
-			  jumping_time = 116;
-				//jump = false;
-
+				jumping_time = 116;
 			} else {
 				if ((this.box.x+this.box.width < i.box.x || this.box.x > i.box.x+i.box.width)
 						&& (jump_height > -1))
 					this.box.y += 1.1;
-
 			}
 		}
 	}

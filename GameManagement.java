@@ -36,7 +36,6 @@ public class GameManagement {
 	// creates list for current obstacles
 
 	public static void restartLevel(Player player) {
-		System.out.println("COUNTER: " + obstacleCounter);
 		if (!player.alive) { player.attempts += 1; }
 		else if (player.succeeded && Scene.scene != "COMPLETED") {
 			obstacleCounter += 1;
