@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class Player extends GameObject {
 
-	int attempts = 0;
+	int attempts = 1;
 	boolean alive = true;
 	boolean succeeded = false;
 	double speed = 3;
@@ -41,8 +41,8 @@ public class Player extends GameObject {
 		if (jump) {
 			jumping_time += 2;
 			jump_height = -(-0.03*jumping_time*jumping_time + 3.5*jumping_time);
-			if (going_right) screen.drawImage(runningRight.get((int) (jumping_time / 20) + 14).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
-			else screen.drawImage(runningLeft.get((int) (jumping_time / 20) + 14).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+			if (going_right) screen.drawImage(runningRight.get((int) (jumping_time / 20) + 4).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
+			else screen.drawImage(runningLeft.get((int) (jumping_time / 20) + 4).getImage(), (int) (this.box.x - 15), (int) (this.box.y + jump_height - 5), null);
 		}
 		if (RIGHT) {
 			this.box.x += speed;

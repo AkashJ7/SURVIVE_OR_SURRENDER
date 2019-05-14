@@ -22,8 +22,10 @@ public class Scene extends JPanel {
 
 	Player player = new Player();
 	GameObject door = new GameObject(700, 480, 50, 80, 1);
+
 	JButton start = new JButton("START");
 	JButton returnHome = new JButton("RETURN TO MENU");
+	JButton surrender = new JButton("SURRENDER");
 	JButton pause = new JButton("| |");
 	JButton resume = new JButton("RESUME");
 	JButton restartGame = new JButton("RESTART");
@@ -45,7 +47,9 @@ public class Scene extends JPanel {
 	Font sans20b = new Font("Sans Serif", Font.BOLD, 20);
 	Font sans30 = new Font("Sans Serif", Font.PLAIN, 30);
 	Font sans30b = new Font("Sans Serif", Font.BOLD, 30);
+	Font sans30i = new Font("Sans Serif", Font.ITALIC, 30);
 	Font sans36 = new Font("Sans Serif", Font.PLAIN, 36);
+	Font sans36b = new Font("Sans Serif", Font.BOLD, 36);
 	Font sans36i = new Font("Sans Serif", Font.ITALIC, 36);
 	Font sans50bi = new Font("Sans Serif", Font.BOLD | Font.ITALIC, 50);
 	Font sans50b = new Font("Sans Serif", Font.BOLD, 50);
@@ -114,9 +118,12 @@ public class Scene extends JPanel {
 			screen.setFont(sans50b);
 			screen.drawString("CREDITS", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("CREDITS")/2, 100);
 			screen.setFont(sans30);
-			screen.drawString("Game created and developed by", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Game created and developed by")/2, 350);
+			screen.drawString("Inspired by the online game", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Inspired by the online game")/2, 250);
+			screen.setFont(sans30i);
+			screen.drawString("GIVE UP", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("GIVE UP")/2, 300);
 			screen.setFont(sans30);
-			screen.drawString("Akash Jagdeesh and Arjun Jagdeesh", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Akash Jagdeesh and Arjun Jagdeesh")/2, 400);
+			screen.drawString("Game created and developed by", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Game created and developed by")/2, 400);
+			screen.drawString("Akash Jagdeesh and Arjun Jagdeesh", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth("Akash Jagdeesh and Arjun Jagdeesh")/2, 450);
 		}
 		else if (scene == "NEXT") {
 			screen.drawImage(background.getImage(), 0, 0, null);
@@ -130,8 +137,8 @@ public class Scene extends JPanel {
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
-				if ((GameManagement.currentObstacles.size() < GameManagement.obstacles.size()) ||
-					(GameManagement.currentWallPlatform.size() < GameManagement.wallPlatform.size())) {
+				if ((GameManagement.currentObstacles.size() <= GameManagement.obstacles.size()) ||
+					(GameManagement.currentWallPlatform.size() <= GameManagement.wallPlatform.size())) {
 					GameManagement.restartLevel(player);
 				}
 				else if (player.succeeded) {
@@ -245,9 +252,23 @@ public class Scene extends JPanel {
 					}
 				});
 
+				surrender.setBackground(new Color(50, 150, 255));
+	            surrender.setForeground(Color.BLACK);
+	            surrender.setFont(sans36b);
+	            surrender.setFocusPainted(false);
+	            surrender.setBounds(20, 0, 745, 50);
+	            surrender.addActionListener(new ActionListener() {
+	               public void actionPerformed(ActionEvent e) {
+	                  removeAll();
+	                  ranIntro_SURRENDERED = false;
+	                  scene = "SURRENDERED";
+	               }
+	            });
+
 				ranIntro_LEVEL = true;
 
 				add(pause);
+				add(surrender);
 			}
 		}
 		else if (scene == "PAUSED") {
