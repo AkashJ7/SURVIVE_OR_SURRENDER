@@ -32,6 +32,9 @@ public class GameManagement {
 		add(new Wall(765.0, 0.0, 27.0, 1));
 		add(new Platform(0.0, 540.0, 40.0, 1));
 		add(new Platform(0.0, 50.0, 40.0, 1));
+		add(new Wall(695.0, 0.0, 3.0, 1));
+		add(new Wall(595.0, 65.0, 2.0, 1));
+		add(new Platform(595.0, 105.0, 12.0, 1));
 	}};
 	// creates list for current obstacles
 

@@ -127,6 +127,7 @@ public class Scene extends JPanel {
 		}
 		else if (scene == "NEXT") {
 			screen.drawImage(background.getImage(), 0, 0, null);
+			screen.setFont(sans20b);
 
 			screen.setColor(Color.BLUE.darker());
 			screen.fillRect((int) door.box.x, (int) door.box.y, (int) door.box.width, (int) door.box.height);
@@ -134,6 +135,7 @@ public class Scene extends JPanel {
 			player.constrain();
 			player.move(screen);
 			GameManagement.displayGameObjects(screen);
+			player.displayAttempts(screen);
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
@@ -239,11 +241,11 @@ public class Scene extends JPanel {
 			if (!ranIntro_LEVEL) {
 				repaint();
 				pause.setMargin(new Insets(0, 0, 4, 0));
-				pause.setBackground(Color.GRAY.darker());
+				pause.setBackground(Color.DARK_GRAY);
 				pause.setForeground(Color.WHITE);
 				pause.setFont(sans20b);
 				pause.setFocusPainted(false);
-				pause.setBounds(DISPLAY_WIDTH - 65, 10, 40, 40);
+				pause.setBounds(DISPLAY_WIDTH - 85, 0, 50, 50);
 				pause.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						removeAll();
@@ -256,7 +258,7 @@ public class Scene extends JPanel {
 	            surrender.setForeground(Color.BLACK);
 	            surrender.setFont(sans36b);
 	            surrender.setFocusPainted(false);
-	            surrender.setBounds(20, 0, 745, 50);
+	            surrender.setBounds(20, 0, 675, 50);
 	            surrender.addActionListener(new ActionListener() {
 	               public void actionPerformed(ActionEvent e) {
 	                  removeAll();

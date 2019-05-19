@@ -101,8 +101,12 @@ public class Player extends GameObject {
 		}
 	}
 
-	public void displayTries(Graphics screen) {
-		//
+	public void displayAttempts(Graphics screen) {
+		screen.setColor(Color.DARK_GRAY);
+		screen.fillRect(615, 70, 150, 35);
+		screen.setColor(Color.WHITE);
+		if (attempts < 10) screen.drawString("ATTEMPTS: " + attempts, 625, 95);
+		else screen.drawString("ATTEMPTS: " + attempts, 619, 95);
 	}
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
