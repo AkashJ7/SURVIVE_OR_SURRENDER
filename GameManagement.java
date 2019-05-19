@@ -10,8 +10,8 @@ public class GameManagement {
 	static int obstacleCounter = 1;
 
 	static ArrayList<GameObject> obstacles = new ArrayList<GameObject>() {{
-		add(new Spikes(330.0, 510.0, 2.0, 2));   //2
-		add(new Spikes(460.0, 510.0, 2.0, 3));  //3
+		add(new Spikes(330.0, 520.0, 2.0, 2));   //2
+		add(new Spikes(460.0, 520.0, 2.0, 3));  //3
 		add(new Crusher(480.0, 50.0, 4));    //4
 		add(new Crusher(100.0, 50.0, 4));
 	}}; // list with all obstacles
@@ -50,6 +50,7 @@ public class GameManagement {
 		player.box.x = 100;
 		player.box.y = 500;
 		player.jumping_time = 0;
+		player.jump_height = 0;
 	}
 
 	public static void addObstacle(int obstacleTag) {

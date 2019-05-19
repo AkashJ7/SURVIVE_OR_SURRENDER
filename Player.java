@@ -96,7 +96,7 @@ public class Player extends GameObject {
 			} else {
 				if ((this.box.x+this.box.width < i.box.x || this.box.x > i.box.x+i.box.width)
 						&& (jump_height > -1))
-					this.box.y += 1.1;
+					this.box.y += 0.75;
 			}
 		}
 	}
