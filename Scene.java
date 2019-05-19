@@ -301,7 +301,7 @@ public class Scene extends JPanel {
 						player.attempts = 0;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
-						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
 						removeAll();
 						ranIntro_LEVEL = false;
 						scene = "NEXT";
@@ -320,7 +320,7 @@ public class Scene extends JPanel {
 						player.attempts = 0;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
-						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
 						removeAll();
 						ranIntro_HOME = false;
 						scene = "HOME";
@@ -370,7 +370,7 @@ public class Scene extends JPanel {
 						player.attempts = 0;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
-						GameManagement.currentWallPlatform.subList(4, GameManagement.currentWallPlatform.size()).clear();
+						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
 						removeAll();
 						ranIntro_HOME = false;
 						scene = "HOME";
