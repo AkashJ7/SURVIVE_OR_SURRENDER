@@ -5,54 +5,106 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 
+/**
+ * The JPanel which contains all the JComponents and graphics of the game.
+ * It takes in keyboard input to control the player,
+ * and contains the logic for scene transitions, gameplay, etc.
+ *
+ * @author Akash Jagdeesh
+ * @author Arjun Jagdeesh
+ */
+
 public class Scene extends JPanel {
 
+	/** Current scene name, used to switch scenes */
 	static String scene = "HOME";
+	/** Width of display panel */
 	static final int DISPLAY_WIDTH = 800;
+	/** Height of display panel */
 	static final int DISPLAY_HEIGHT = 600;
-	static boolean update = false;
-
+	/** Whether the scene has just been switched to "HOME" (used to create and add JComponents to panel) */
 	static boolean ranIntro_HOME = false;
+	/** Whether the scene has just been switched to "CONTROLS" (used to create and add JComponents to panel) */
 	static boolean ranIntro_CONTROLS = false;
+	/** Whether the scene has just been switched to "CREDITS" (used to create and add JComponents to panel) */
 	static boolean ranIntro_CREDITS = false;
+	/** Whether the scene has just been switched to "LEVEL" (used to create and add JComponents to panel) */
 	static boolean ranIntro_LEVEL = false;
+	/** Whether the scene has just been switched to "PAUSED" (used to create and add JComponents to panel) */
 	static boolean ranIntro_PAUSED = false;
+	/** Whether the scene has just been switched to "COMPLETED" (used to create and add JComponents to panel) */
 	static boolean ranIntro_COMPLETED = false;
+	/** Whether the scene has just been switched to "SURRENDERED" (used to create and add JComponents to panel) */
 	static boolean ranIntro_SURRENDERED = false;
 
+	/** Player used in this game */
 	Player player = new Player();
+	/** Exit door at the end of the level */
 	GameObject door = new GameObject(700, 480, 50, 80, 1);
 
+	/** Button to start level (in "HOME") */
 	JButton start = new JButton("START");
+	/** Button to return to home screen (while "PAUSED") */
 	JButton returnHome = new JButton("RETURN TO MENU");
+	/** Button to surrender while playing the game (in "LEVEL") */
 	JButton surrender = new JButton("SURRENDER");
+	/** Button to pause game (in "LEVEL") */
 	JButton pause = new JButton("| |");
+	/** Button to resume game (while "PAUSED") */
 	JButton resume = new JButton("RESUME");
+	/** Button to restart the game (while "PAUSED") */
 	JButton restartGame = new JButton("RESTART");
+	/** Button to view game credits (in "HOME") */
 	JButton credits = new JButton("CREDITS");
+	/** Button to view controls (in "HOME") */
 	JButton controls = new JButton("CONTROLS");
+	/** Button to return to home screen (in "CONTROLS" and "CREDITS") */
 	JButton backToHome = new JButton("BACK");
 
+	/** Image buffer that graphics are drawn on */
 	BufferedImage buffer = new BufferedImage(DISPLAY_WIDTH, DISPLAY_HEIGHT, BufferedImage.TYPE_INT_RGB);
+	/** Graphics object of the buffer, used to draw on the buffer */
 	Graphics screen = buffer.getGraphics();
 
+	/** Background image of the level */
 	ImageIcon background = new ImageIcon("Sprites/Bricks.png");
+	/** Home screen's player image */
 	ImageIcon logo = new ImageIcon("Sprites/Logo.png");
+	/** Home screen's spikes image */
 	ImageIcon spikes_logo = new ImageIcon("Sprites/SPIKE.png");
+	/** Home screen's platform image */
 	ImageIcon platform_logo = new ImageIcon("Sprites/Block.jpg");
+	/** Completed screen's trophy image */
 	ImageIcon trophy = new ImageIcon("Sprites/Trophy.png");
+	/** Surrendered screen's white flag (surrender) image */
 	ImageIcon flag = new ImageIcon("Sprites/Surrender Flag.png");
 
+	/** 20 point Sans Serif font */
 	Font sans20 = new Font("Sans Serif", Font.PLAIN, 20);
+	/** 20 point bolded Sans Serif font */
 	Font sans20b = new Font("Sans Serif", Font.BOLD, 20);
+	/** 30 point Sans Serif font */
 	Font sans30 = new Font("Sans Serif", Font.PLAIN, 30);
+	/** 30 point bolded Sans Serif font */
 	Font sans30b = new Font("Sans Serif", Font.BOLD, 30);
+	/** 30 point italicized Sans Serif font */
 	Font sans30i = new Font("Sans Serif", Font.ITALIC, 30);
+	/** 36 point Sans Serif font */
 	Font sans36 = new Font("Sans Serif", Font.PLAIN, 36);
+	/** 36 point bolded Sans Serif font */
 	Font sans36b = new Font("Sans Serif", Font.BOLD, 36);
+	/** 36 point italicized Sans Serif font */
 	Font sans36i = new Font("Sans Serif", Font.ITALIC, 36);
+	/** 50 point bolded and italicized Sans Serif font */
 	Font sans50bi = new Font("Sans Serif", Font.BOLD | Font.ITALIC, 50);
+	/** 50 point bolded Sans Serif font */
 	Font sans50b = new Font("Sans Serif", Font.BOLD, 50);
+
+   /**
+    * Instantiates the JPanel, and is used as a content pane that a JFrame can use
+    *
+    * @param fps The number of frames per second that the game will run at
+    */
 
 	public Scene(int fps) {
 		GameManagement.addKeyBinding(this, KeyEvent.VK_UP, "JUMP", (e) -> { player.UP = true; }, false);
@@ -85,6 +137,10 @@ public class Scene extends JPanel {
 		});
 		gameTimer.start();
 	}
+
+   /**
+    * Draws the graphics of each scene to a buffer image, and calls all action methods in the game (of Player, GameManagement, etc.)
+    */
 
 	public void updateScene() {
 		if (scene == "HOME") {
@@ -129,7 +185,7 @@ public class Scene extends JPanel {
 			screen.drawImage(background.getImage(), 0, 0, null);
 			screen.setFont(sans20b);
 
-			screen.setColor(Color.BLUE.darker());
+			screen.setColor(Color.BLACK);
 			screen.fillRect((int) door.box.x, (int) door.box.y, (int) door.box.width, (int) door.box.height);
 
 			player.constrain();
@@ -139,8 +195,7 @@ public class Scene extends JPanel {
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
-				if ((GameManagement.currentObstacles.size() <= GameManagement.obstacles.size()) ||
-					(GameManagement.currentWallPlatform.size() <= GameManagement.wallPlatform.size())) {
+				if ((GameManagement.currentObstacles.size() <= GameManagement.obstacles.size())) {
 					GameManagement.restartLevel(player);
 				}
 				else if (player.succeeded) {
@@ -180,6 +235,12 @@ public class Scene extends JPanel {
 			screen.drawString(String.valueOf(GameManagement.obstacles.size() - GameManagement.currentObstacles.size()) + " " + ((GameManagement.obstacles.size() - GameManagement.currentObstacles.size() == 1) ? "obstacle" : "obstacles") + " remained", DISPLAY_WIDTH/2 - screen.getFontMetrics().stringWidth(String.valueOf(GameManagement.obstacles.size() - GameManagement.currentObstacles.size()) + " " + ((GameManagement.obstacles.size() - GameManagement.currentObstacles.size() == 1) ? "obstacle" : "obstacles") + " remained")/2, 425);
 		}
 	}
+
+   /**
+    * Draws the image buffer to the main JPanel, and displays all the JComponents (mainly JButtons)
+    *
+    * @param g An internal variable required by paintComponent to draw to the JPanel
+    */
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -298,7 +359,7 @@ public class Scene extends JPanel {
 				restartGame.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
-						player.attempts = 0;
+						player.attempts = 1;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
 						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
@@ -317,7 +378,7 @@ public class Scene extends JPanel {
 				returnHome.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
-						player.attempts = 0;
+						player.attempts = 1;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
 						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
@@ -367,7 +428,7 @@ public class Scene extends JPanel {
 				returnHome.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						GameManagement.restartLevel(player);
-						player.attempts = 0;
+						player.attempts = 1;
 						GameManagement.obstacleCounter = 1;
 						GameManagement.currentObstacles.clear();
 						GameManagement.currentWallPlatform.subList(7, GameManagement.currentWallPlatform.size()).clear();
