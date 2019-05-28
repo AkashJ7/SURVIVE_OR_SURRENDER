@@ -27,7 +27,8 @@ public class GameManagement {
 		add(new Crusher(480.0, 50.0, 4));    //4
 		add(new Crusher(100.0, 50.0, 4));
 		add(new Spikes(100.0, 440.0, 2.0, 5));
-		add(new Spikes(340.0, 360.0, 2.0, 6));
+		add(new Spikes(340.0, 360.0, 1.0, 6));
+		add(new Spikes(450.0, 360.0, 1.0, 6));
 		add(new Spikes(510.0, 440.0, 4.0, 4));
 		add(new Spikes(20.0, 220.0, 1.0, 7));
 	}};
@@ -71,10 +72,13 @@ public class GameManagement {
 
 	public static void restartLevel(Player player) {
 		if (!player.alive) { player.attempts += 1; }
-		else if (player.succeeded && Scene.scene != "COMPLETED") {
+		else if (player.succeeded && obstacleCounter < 7) {//Scene.scene != "COMPLETED") {
 			obstacleCounter += 1;
 			addObstacle(obstacleCounter);
 			addWallPlatform(obstacleCounter);
+		} else {
+			Scene.ranIntro_COMPLETED = false;
+			Scene.scene = "COMPLETED";
 		}
 		player.alive = true;
 		player.succeeded = false;

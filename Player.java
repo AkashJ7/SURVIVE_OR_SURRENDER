@@ -129,8 +129,8 @@ public class Player extends GameObject {
 
 			if ((this.box.x > i.box.x && this.box.x + this.box.width < i.box.x + i.box.width) && (this.box.y+this.box.height+jump_height > i.box.y
 					&& this.box.y+this.box.height+jump_height < i.box.y+i.box.height)) {
-				this.box.y = i.box.y - this.box.height - 3;           //above platform
 				jumping_time = 116;
+				this.box.y = i.box.y - this.box.height - 3;           //above platform
 				if (jump_height > -5) able_to_jump = true;
 			} else {
 				if ((this.box.x+this.box.width < i.box.x || this.box.x > i.box.x+i.box.width)
@@ -161,7 +161,6 @@ public class Player extends GameObject {
     */
 
 	public void checkForFailure(ArrayList<GameObject> obstacles) {
-		System.out.println(GameManagement.currentObstacles.size());
 		for(GameObject danger : obstacles) {
 			if (danger.box.intersects(this.box.x, this.box.y + jump_height, this.box.width, this.box.height)) {
 				alive = false;

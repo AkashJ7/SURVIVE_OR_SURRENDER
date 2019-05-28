@@ -195,14 +195,10 @@ public class Scene extends JPanel {
 			player.checkForFailure(GameManagement.currentObstacles);
 			player.checkForSuccess(door);
 			if (!player.alive || player.succeeded) {
-				if ((GameManagement.currentObstacles.size() <= GameManagement.obstacles.size())) {
-					GameManagement.restartLevel(player);
-				}
-				else if (player.succeeded) {
+				if (GameManagement.obstacleCounter == 7 && player.succeeded) {
 					removeAll();
-					ranIntro_COMPLETED = false;
-					scene = "COMPLETED";
 				}
+				GameManagement.restartLevel(player);
 			}
 		}
 		else if (scene == "PAUSED") {
