@@ -72,7 +72,7 @@ public class GameManagement {
 
 	public static void restartLevel(Player player) {
 		if (!player.alive) { player.attempts += 1; }
-		else if (player.succeeded && obstacleCounter < 7) {//Scene.scene != "COMPLETED") {
+		else if (player.succeeded && obstacleCounter < 7) {
 			obstacleCounter += 1;
 			addObstacle(obstacleCounter);
 			addWallPlatform(obstacleCounter);
